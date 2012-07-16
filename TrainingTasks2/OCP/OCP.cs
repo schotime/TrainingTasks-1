@@ -16,6 +16,25 @@ namespace TrainingTasks2.OCP
 
         public decimal GetDiscountPercentage()
         {
+            var percentCal = new DiscountPercentageCalculator();
+            return percentCal.CalculateDiscountPercentage(_items);
+        }
+
+        public void Add(CartItem product)
+        {
+            _items.Add(product);
+        }
+
+        public void Delete(CartItem product)
+        {
+            _items.Remove(product);
+        }
+    }
+
+    public class DiscountPercentageCalculator
+    {
+        public decimal CalculateDiscountPercentage(List<CartItem> _items)
+        {
             decimal ammount = 0;
 
             if (_items.Count >= 5 && _items.Count < 10)
@@ -32,16 +51,6 @@ namespace TrainingTasks2.OCP
             }
 
             return ammount;
-        }
-
-        public void Add(CartItem product)
-        {
-            _items.Add(product);
-        }
-
-        public void Delete(CartItem product)
-        {
-            _items.Remove(product);
         }
     }
 }
