@@ -46,6 +46,8 @@
     <Compile Include="DIP\Birthday.cs" />
     <Compile Include="DIP\BirthdayService.cs" />
     <Compile Include="DIP\DIP.cs" />
+    <Compile Include="DIP\IToday.cs" />
+    <Compile Include="DIP\Today.cs" />
     <Compile Include="ISP\Bird.cs" />
     <Compile Include="ISP\Cat.cs" />
     <Compile Include="ISP\Fish.cs" />
