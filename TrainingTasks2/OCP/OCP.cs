@@ -16,8 +16,8 @@ namespace TrainingTasks2.OCP
 
         public decimal GetDiscountPercentage()
         {
-            var percentCal = new DiscountPercentageCalculator();
-            return percentCal.CalculateDiscountPercentage(_items);
+            var percentCal = new DiscountCalculator(new List<IDiscount>() {new DiscountRuleTenItems()});
+            return percentCal.CalculateDiscountPercentage(_items.Count);
         }
 
         public void Add(CartItem product)
@@ -31,26 +31,44 @@ namespace TrainingTasks2.OCP
         }
     }
 
-    public class DiscountPercentageCalculator
+    public class DiscountCalculator : IDiscountCalulator
     {
-        public decimal CalculateDiscountPercentage(List<CartItem> _items)
+        private readonly List<IDiscount> _discounts;
+
+        public DiscountCalculator(List<IDiscount> discounts)
         {
-            decimal ammount = 0;
-
-            if (_items.Count >= 5 && _items.Count < 10)
-            {
-                ammount = 10;
-            }
-            else if (_items.Count >= 10 && _items.Count < 15)
-            {
-                ammount = 15;
-            }
-            else if (_items.Count >= 15)
-            {
-                ammount = 25;
-            }
-
-            return ammount;
+            _discounts = discounts;
         }
+
+        public decimal CalculateDiscountPercentage(int itemCount)
+        {
+            return _discounts
+                .First(dr => dr.Match(itemCount))
+                .Ammount;
+        }
+    }
+
+    public interface IDiscount
+    {
+        decimal Ammount { get; }
+        bool Match(int itemCount);
+    }
+
+    public class DiscountRuleTenItems : IDiscount
+    {
+        public decimal Ammount
+        {
+            get { return 15; }
+        }
+
+        public bool Match(int itemCount)
+        {
+            return itemCount >= 10 && itemCount < 15;
+        }
+    }
+
+    public interface IDiscountCalulator
+    {
+        decimal CalculateDiscountPercentage(int itemCount);
     }
 }
