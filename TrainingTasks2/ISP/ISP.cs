@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TrainingTasks2.ISP
 {
-    public interface IAnimal : ICanFly, ICanRun
+    public interface IAnimal
     {
         void See();
         void Eat();
