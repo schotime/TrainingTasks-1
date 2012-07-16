@@ -5,13 +5,11 @@ using System.Text;
 
 namespace TrainingTasks2.LSP
 {
-    public class Rectangle
+    public class Rectangle : Shape
     {
-        public virtual int Width { get; set; }
-        public virtual int Height { get; set; }
     }
 
-    public class Square : Rectangle
+    public class Square : Shape
     {
         public override int Height
         {
@@ -31,5 +29,11 @@ namespace TrainingTasks2.LSP
             base.Height = value;
             base.Width = value;
         }
+    }
+
+    public class Shape
+    {
+        public virtual int Width { get; set; }
+        public virtual int Height { get; set; }
     }
 }
