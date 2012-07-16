@@ -52,8 +52,13 @@
     <Compile Include="ISP\ISP.cs" />
     <Compile Include="LSP\LSP.cs" />
     <Compile Include="OCP\CartItem.cs" />
+    <Compile Include="OCP\DiscountCalculator.cs" />
+    <Compile Include="OCP\DiscountRuleTenItems.cs" />
+    <Compile Include="OCP\IDiscount.cs" />
+    <Compile Include="OCP\IDiscountCalulator.cs" />
     <Compile Include="OCP\OCP.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SRP\EmailService.cs" />
     <Compile Include="SRP\FakeDatabase.cs" />
     <Compile Include="SRP\FakeSmtpClient.cs" />
     <Compile Include="SRP\SRP.cs" />
