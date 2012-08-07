@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TrainingTasks3
 {
@@ -15,7 +16,18 @@ namespace TrainingTasks3
 
         public List<MenuItem> Build()
         {
-            return new List<MenuItem>();
+            var list = new List<MenuItem>(_config.StaticMenuItems);
+            list.AddRange(_config.DynamicMenuItemsFunc(_context));
+            
+            var newlist = new List<MenuItem>();
+            foreach (var menuItem in list)
+            {
+                if (_config.IsVisibleFunc(_context, menuItem))
+                {
+                    newlist.Add(menuItem);
+                }
+            }
+            return newlist;
         }
     }
 }
