@@ -29,5 +29,12 @@ namespace TrainingTasks3
             }
             return newlist;
         }
+
+        public List<MenuItem> BuildLinq()
+        {
+            var list = new List<MenuItem>(_config.StaticMenuItems);
+            list.AddRange(_config.DynamicMenuItemsFunc(_context));
+            return list.Where(menuItem => _config.IsVisibleFunc(_context, menuItem)).ToList();
+        }
     }
 }
