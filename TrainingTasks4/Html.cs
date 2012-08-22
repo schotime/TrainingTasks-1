@@ -9,7 +9,8 @@ namespace TrainingTasks4
     {
         private string _tagName;
         private Dictionary<string, string> _attributes = new Dictionary<string, string>();
-        private List<string> _classes = new List<string>(); 
+        private List<string> _classes = new List<string>();
+        private bool _selfClosing;
 
         public Html(string tagName)
         {
@@ -22,9 +23,12 @@ namespace TrainingTasks4
             return html;
         }
 
-        public Html Attr(string key, string value)
+        public Html Attr(string key, object value)
         {
-            _attributes.Add(key, value);
+            if (value != null)
+            {
+                _attributes.Add(key, value.ToString());    
+            }
             return this;
         }
 
@@ -47,8 +51,16 @@ namespace TrainingTasks4
                 sb.Append(" class=\"" + string.Join(" ", _classes.ToArray()) + "\"");
             }
             
-            sb.Append(">");
-            sb.Append("</" + _tagName + ">");
+            
+            if (_selfClosing)
+            {
+                sb.Append(" />");
+            }
+            else
+            {
+                sb.Append(">");
+                sb.Append("</" + _tagName + ">");
+            }
 
             return sb.ToString();
         }
@@ -68,6 +80,12 @@ namespace TrainingTasks4
         public static implicit operator string(Html html)
         {
             return html.ToString();
+        }
+
+        public Html SelfClosing()
+        {
+            _selfClosing = true;
+            return this;
         }
     }
 }

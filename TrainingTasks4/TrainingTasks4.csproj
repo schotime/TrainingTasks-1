@@ -43,7 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Html.cs" />
+    <Compile Include="Html.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="HtmlHelper.cs" />
+    <Compile Include="HtmlHelperTests.cs" />
     <Compile Include="HtmlTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

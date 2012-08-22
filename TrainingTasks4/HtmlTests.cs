@@ -43,5 +43,72 @@ namespace TrainingTasks4
             Html html = Html.Tag("span").Attr("test", "testvalue");
             Assert.True("<span test=\"testvalue\"></span>" == html);
         }
+
+        [Test]
+        public void BasicHtmlBuilderWithTwoClasses()
+        {
+            Html html = Html.Tag("span").AddClass("test").AddClass("test2");
+            Assert.AreEqual("<span class=\"test test2\"></span>", html.ToString());
+        }
+
+        [Test]
+        public void BasicHtmlBuilder1()
+        {
+                       
+            Html html2 = Html.Tag("div");
+            html2.AddClass("hi");
+
+            Html html = new Html("span");
+            html.Attr("test", "1");
+
+            Assert.AreEqual("<span test=\"1\"></span>", html.ToString());
+        }
+
+        [Test]
+        public void BasicHtmlBuilder2()
+        {
+            Html html = new Html("span");
+            html.AddClass("test");
+
+            Assert.AreEqual("<span class=\"test\"></span>", meth(html));
+        }
+
+        [Test]
+        public void BasicHtmlBuilder3()
+        {
+            Html html = new Html("span");
+
+            Assert.AreEqual("<span></span>", html.ToString());
+        }
+
+        [Test]
+        public void BasicHtmlBuilder4()
+        {
+            Html html = Html.Tag("span");
+            html.Attr("test", "value");
+
+            object html1 = html;
+
+            Assert.AreEqual("<span test=\"value\"></span>", html1.ToString());
+        }
+
+        private string meth(string html)
+        {
+            return html;
+        }
+
+        [Test]
+        public void HtmlBuilderSelfClosing()
+        {
+            var html = new Html("input").SelfClosing();
+            Assert.AreEqual("<input />", html.ToString());
+        }
+
+        [Test]
+        public void HtmlBuilderWithNullAttrDoesntRenderAttr()
+        {
+            var html = new Html("span").Attr("test", null);
+            Assert.AreEqual("<span></span>", html.ToString());
+        }
     }
 }
